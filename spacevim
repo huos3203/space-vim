@@ -1,0 +1,12 @@
+function! Layers()
+    Layer 'fzf'
+    Layer 'unite'
+    Layer 'better-defaults'
+    Layer 'chinese'
+endfunction
+
+function! UserInit()
+endfunction
+
+function! UserConfig()
+endfunction
