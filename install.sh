@@ -10,21 +10,9 @@ dot_spacevim="$HOME/.spacevim"
 [ -z "$REPO_BRANCH" ] && REPO_BRANCH='master'
 debug_mode='0'
 [ -z "$VIM_PLUG_PATH" ] && VIM_PLUG_PATH="$HOME/.vim/autoload"
-[ -z "$NEOVIM_PLUG_PATH" ] && VIM_PLUG_PATH="$HOME/.local/share/nvim/site/autoload"
 [ -z "$VIM_PLUG_URL" ] && VIM_PLUG_URL='https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 ########## Basic setup tools
-help() {
-  cat << EOF
-usage: $0 [OPTIONS]
-
-    -- help               Show this message
-    -- all                Install space-vim for both Vim and NeoVim
-    -- vim                Install space-vim for Vim
-    -- neovim             Install space-vim for NeoVim
-EOF
-}
-
 msg() {
     printf '%b\n' "$1" >&2
 }
@@ -87,7 +75,7 @@ lnif() {
 backup() {
     if [ -e "$1" ];
     then
-        msg "\033[1;34m==>\033[0m Attempting to back up your original vim configuration."
+        msg "Attempting to back up your original vim configuration."
         today=$(date +%Y%m%d_%s)
         mv -v "$1" "$1.$today"
 
@@ -124,19 +112,35 @@ create_symlinks() {
     local source_path="$1"
     local target_path="$2"
 
-    lnif "$source_path" "$target_path"
+    lnif "$source_path/init.vim"            "$target_path/.vimrc"
 
     ret="$?"
-    success "Setting up symlinks."
+    success "Setting up vim symlinks."
 
     debug
 }
 
 sync_vim_plug() {
-    if [ ! -f "'$1'/plug.vim" ];
+    if [ ! -f "$VIM_PLUG_PATH/plug.vim" ];
     then
-        curl -fLo "'$1'/plug.vim" --create-dirs "$2"
+        curl -fLo "$1/plug.vim" --create-dirs "$2"
     fi
+
+    debug
+}
+
+setup_vim_plug(){
+    local system_shell="$SHELL"
+    export SHELL='/bin/sh'
+
+    vim \
+        "+PlugInstall!" \
+        "+PlugClean" \
+        "+qall"
+
+    export SHELL="$system_shell"
+
+    success "Now updating/installing plugins using vim-plug"
 
     debug
 }
@@ -154,32 +158,32 @@ generate_dot_spacevim(){
 " e.g., Layer 'better-defaults', { 'exclude': 'itchyny/vim-cursorword' }
 function! Layers()
 
-    " Default layers, recommended!
-    Layer 'fzf'
-    Layer 'unite'
-    Layer 'better-defaults'
+  " Default layers, recommended!
+  Layer 'fzf'
+  Layer 'unite'
+  Layer 'better-defaults'
 
 endfunction
 
 " Put your private plugins here.
 function! UserInit()
 
-    " Space has been set as the default leader key,
-    " if you want to change it, uncomment and set it here.
-    " let g:spacevim_leader = "<\Space>"
-    " let g:spacevim_localleader = ','
+  " Space has been set as the default leader key,
+  " if you want to change it, uncomment and set it here.
+  " let g:spacevim_leader = "<\Space>"
+  " let g:spacevim_localleader = ','
 
-    " Install private plugins
-    " Plug 'extr0py/oni'
+  " Install private plugins
+  " Plug 'extr0py/oni'
 
 endfunction
 
 " Put your costom configurations here, e.g., change the colorscheme.
 function! UserConfig()
 
-    " If you enable airline layer and have installed the powerline fonts, set it here.
-    " let g:airline_powerline_fonts=1
-    " color desert
+  " If you enable airline layer and have installed the powerline fonts, set it here.
+  " let g:airline_powerline_fonts=1
+  " color desert
 
 endfunction
 DOTSPACEVIM
@@ -188,102 +192,25 @@ DOTSPACEVIM
     fi
 }
 
-setup_vim_plug(){
-    local system_shell="$SHELL"
-    export SHELL='/bin/sh'
-
-    "$1" \
-        "+PlugInstall!" \
-        "+PlugClean" \
-        "+qall"
-
-    export SHELL="$system_shell"
-
-    success "Now updating/installing plugins using vim-plug"
-
-    debug
-}
-
-install_for_vim() {
-
-    program_must_exist "git"
-    program_must_exist "vim"
-
-    local conf_file="$HOME/.vimrc"
-
-    sync_repo       "$APP_PATH" \
-                    "$REPO_URI" \
-                    "$REPO_BRANCH" \
-                    "$app_name"
-
-    backup          "$conf_file"
-
-    create_symlinks "$APP_PATH/init.vim" \
-                    "$conf_file"
-
-    sync_vim_plug   "$VIM_PLUG_PATH" \
-                    "$VIM_PLUG_URL"
-
-    generate_dot_spacevim
-
-    setup_vim_plug  "vim"
-
-}
-
-install_for_neovim() {
-
-    program_must_exist "git"
-    program_must_exist "nvim"
-
-    local conf_file="$HOME/.config/nvim/init.vim"
-
-    sync_repo       "$APP_PATH" \
-                    "$REPO_URI" \
-                    "$REPO_BRANCH" \
-                    "$app_name"
-
-    backup          "$conf_file"
-
-    create_symlinks "$APP_PATH/init.vim" \
-                    "$conf_file"
-
-    sync_vim_plug   "$NEOVIM_PLUG_PATH" \
-                    "$VIM_PLUG_URL"
-
-    generate_dot_spacevim
-
-    setup_vim_plug  "nvim"
-
-}
-
 ########## Main()
-if [ $# -eq 0 ]; then
-    help
-    exit 0
-else
-    for opt in "$@"; do
-      case $opt in
-        help)
-          help
-          exit 0
-          ;;
-        all)
-          install_for_vim
-          install_for_neovim
-          ;;
-        vim)
-          install_for_vim
-          ;;
-        neovim)
-          install_for_neovim
-          ;;
-        *)
-          echo "unknown option: $opt"
-          help
-          exit 1
-          ;;
-      esac
-    done
-fi
+program_must_exist "vim"
+program_must_exist "git"
 
-msg    "\nThanks for installing \033[1;31m$app_name\033[0m. Enjoy!"
+backup          "$HOME/.vimrc"
+
+sync_repo       "$APP_PATH" \
+                "$REPO_URI" \
+                "$REPO_BRANCH" \
+                "$app_name"
+
+create_symlinks "$APP_PATH" \
+                "$HOME"
+
+sync_vim_plug   "$VIM_PLUG_PATH" \
+                "$VIM_PLUG_URL"
+
+generate_dot_spacevim
+
+setup_vim_plug
+
+msg             "\nThanks for installing \033[1;31m$app_name\033[0m. Enjoy!"

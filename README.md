@@ -31,8 +31,13 @@
     * [Windows](#windows)
     * [Manual (Linux and macOS)](#manual-linux-and-macos)
 * [Customize](#customize)
+    * [Presetting](#presetting)
+    * [`Layers()`](#layers)
+    * [`UserInit()`](#userinit)
+    * [`UserConfig()`](#userconfig)
 * [How to use](#how-to-use)
     * [Bootstrap](#bootstrap)
+    * [Commands](#commands)
     * [Tips](#tips)
         * [Enable GUI color in terminal vim](#enable-gui-color-in-terminal-vim)
         * [Font](#font)
@@ -47,20 +52,20 @@
 
 space-vim is a vim distribution for vim plugins and resources, compatible with Vim and NeoVim.
 
-It is inspired by [spacemacs](https://github.com/syl20bnr/spacemacs) and mimics spacemacs in a high level, especially in the whole architecture, key bindings and UI. if have ever tried spacemacs, you will find space-vim is very similar to it in user experience.
+It is inspired by [spacemacs](https://github.com/syl20bnr/spacemacs) and mimics spacemacs in a high level, especially in the whole architecture, key bindings and GUI. if have ever tried spacemacs, you will find space-vim is very similar to it in user experience.
 
 Elegance here means pleasing, graceful as well as simple. If you are unfamiliar with spacemacs, you can visit [spacemacs.org](http://spacemacs.org/doc/DOCUMENTATION.html) for more about the priciple behind that, which is also what space-vim seeks.
 
 The distribution is completely customizable using `.spacevim`, which is equivalent to `.spacemacs` in spacemacs.
 
-![screenshot](https://github.com/liuchengxu/space-vim/blob/gh-pages/docs/img/screenshot.png?raw=true)
-(Terminal vim with space-vim-dark theme)
+![screenshot](https://raw.githubusercontent.com/liuchengxu/img/master/space-vim/space-vim-cterm.png)
+(Terminal vim with [space-vim-dark](https://github.com/liuchengxu/space-vim-dark) theme)
 
 ## Features
 
 - **Beautiful interface:** I have written a vim colorscheme [space-vim-dark](https://github.com/liuchengxu/space-vim-dark) based on spacemacs-dark theme. You could also try [spacemacs-theme.vim](https://github.com/colepeters/spacemacs-theme.vim).
 
-    ![screenshot](https://github.com/liuchengxu/space-vim-dark/blob/screenshots/screenshot3.png?raw=true)
+    ![screenshot](https://raw.githubusercontent.com/liuchengxu/img/master/space-vim/space-vim-gui.png)
     (Terminal vim with `set termguicolors`)
 
 - **Mnemonic key bindings:** commands have mnemonic prefixes like <kbd>SPC b</kbd> for all the buffer commands.
@@ -68,6 +73,8 @@ The distribution is completely customizable using `.spacevim`, which is equivale
     Meanwhile, the whole key bindings have been well adapted for vim for the lack of great plugins similar to which-key in emacs. Most key bindings are limited to no more than two keystrokes without counting `<Leader>` or `<LocalLeader>` in, e.g. <kbd>SPC x d</kbd> to delete trailing whitespaces.
 
     For different language layers, `<LocalLeader>`, <kbd>,</kbd> as default in space-vim, can be seen as the major-mode prefix in spacemacs.
+
+- **Lean and mean:** no nonsense wrappers, free from being bloated.
 
 ## For whom?
 
@@ -91,16 +98,23 @@ You have to satisfy some prerequisites at first:
 
 ### Linux and macOS
 
-```sh
-# Install space-vim for both Vim and NeoVim
-curl -fLo https://raw.githubusercontent.com/liuchengxu/space-vim/master/install.sh | sh -s -- all
+- curl
 
-# Only install space-vim for Vim
-curl -fLo https://raw.githubusercontent.com/liuchengxu/space-vim/master/install.sh | sh -s -- vim
+    ```sh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/liuchengxu/space-vim/master/install.sh)"
+    ```
 
-# Only install space-vim for NeoVim
-curl -fLo https://raw.githubusercontent.com/liuchengxu/space-vim/master/install.sh | sh -s -- neovim
-```
+- wget
+
+    ```sh
+    sh -c "$(wget -qO- https://raw.githubusercontent.com/liuchengxu/space-vim/master/install.sh)"
+    ```
+
+    :warning: For neovim, after the quick installer is done, you still need to create a symlink:
+
+    ```sh
+    ln -s ~/.space-vim/init.vim ~/.config/nvim/init.vim
+    ```
 
 ### Windows
 
@@ -170,7 +184,21 @@ curl -fLo https://raw.githubusercontent.com/liuchengxu/space-vim/master/install.
 
 You can use `.spacevim` in your home directory to customize space-vim, where you can enable the existing layers, add your extra plugins and private configurations.
 
-If `.spacevim` does not exist, vanilla vim will be loaded!
+If `.spacevim` does not exist, vanilla vim will be loaded! Refer to [.spacevim.template](https://github.com/liuchengxu/space-vim/wiki/.spacevim.template) as an example.
+
+### Presetting
+
+```vim
+" Let vim and neovim share the same plugin directory
+let g:spacevim_plug_home = '~/.vim/plugged'
+
+" Change the background color of theme space-vim-dark (default 235)
+let g:space_vim_dark_background = 234
+```
+
+### `Layers()`
+
+Please refer to [LAYERS](https://github.com/liuchengxu/space-vim/blob/master/layers/LAYERS.md) to take a look at the whole shipped layers.
 
 ```vim
 " You can enable the existing layers in space-vim and
@@ -186,7 +214,11 @@ function! Layers()
     Layer 'better-defaults'
 
 endfunction
+```
 
+### `UserInit()`
+
+```vim
 " Put your private plugins here, e.g., change the colorscheme.
 function! UserInit()
 
@@ -200,7 +232,11 @@ function! UserInit()
     Plug 'morhetz/gruvbox'
 
 endfunction
+```
 
+### `UserConfig()`
+
+```vim
 " Override the existing configurations and add extras here.
 function! UserConfig()
 
@@ -209,26 +245,36 @@ function! UserConfig()
 endfunction
 ```
 
-If have a heavy customized configuration, you can organize them in **private** directory with `packages.vim` and `config.vim` too, which will be loaded on startup. The **private** directory can be considered as either a single layer, i.e., in which you can put packages.vim and config.vim, or a set of multiple layers.
+If have a heavy customized configuration, you can organize them in *private* directory with `packages.vim` and `config.vim` too, which will be loaded on startup. The *private* directory can be considered as either a single layer, i.e., in which you can put packages.vim and config.vim, or a set of multiple layers.
 
 ## How to use
 
-First of all, I recommend you to look through the existing key bindings via <kbd>SPC ?</kbd>. What's more, you definitely can not miss reading the README of [better-defaults layer](https://github.com/liuchengxu/space-vim/blob/master/layers/%2Bvim/better-defaults/README.md), which is of great importance for you to get started quickly.
+First of all, I recommend you to look through the existing key bindings via <kbd>SPC ?</kbd>. What's more, you definitely can not miss reading the README of [better-defaults layer](https://github.com/liuchengxu/space-vim/blob/master/layers/%2Bdistributions/better-defaults/README.md), which is of great importance for you to get started quickly.
 
 For detailed instruction, please refer to the README under the certain layer enabled, or you can see config.vim and packages.vim directly.
 
 If the README is not elaborate, sorry for that, space-vim now is in the early stages and a ton of stuff are waiting to be done.
 
 ### Bootstrap
+
 The modular design is originally from [spacemacs](https://github.com/syl20bnr/spacemacs). The implementation of logic in space-vim is similar to [vim-plug](https://github.com/junegunn/vim-plug).
 
 If you want to know more about the bootstrap of space-vim, please see [bootstrap](https://github.com/liuchengxu/space-vim/wiki/Bootstrap) in wiki.
 
+### Commands
+
+ Command      | Description
+ :---         | :---
+`LayerStatus` | Check the status of layers
+`LayerUpdate` | Update the structure of *layers* directory
+
 ### Tips
+
 For the sake of a better user experience, some extra settings should be done.
 
 #### Enable GUI color in terminal vim
-`:echo has('termguicolors')`, if `1`, then you can enable GUI color in terminal vim, add this to `UserConfig()`:
+
+`echo has('termguicolors')`, if `1`, then you can enable GUI color in terminal vim, add this to `UserConfig()`:
 
 ```vim
 set termguicolors
@@ -242,6 +288,7 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 For more details about true colour, please see the gist [TrueColour.md](https://gist.github.com/XVilka/8346728).
 
 #### Font
+
 Install the [Source Code Pro](https://github.com/adobe-fonts/source-code-pro) or [Powerline](https://github.com/powerline/fonts) font, especially for [airline](https://github.com/liuchengxu/space-vim/blob/master/layers/%2Bthemes/airline/README.md) Layer.
 
 If you are running in terminal you'll need to change font settings of your terminal as well.
