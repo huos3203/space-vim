@@ -3,6 +3,8 @@ function! Layers()
     Layer 'unite'
     Layer 'better-defaults'
     Layer 'chinese'
+    Layer 'github'
+    Layer 'git'
 endfunction
 
 function! UserInit()
