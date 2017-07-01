@@ -5,6 +5,7 @@ function! Layers()
     Layer 'chinese'
     Layer 'github'
     Layer 'git'
+    Layer 'markdown' 
 endfunction
 
 function! UserInit()
