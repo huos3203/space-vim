@@ -5,10 +5,13 @@ function! Layers()
     Layer 'chinese'
     Layer 'github'
     Layer 'git'
-    Layer 'markdown' 
+    Layer 'markdown'     "markdown语法高亮和预览功能
+    Layer 'ycmd'         "语法自动补齐"
+    Layer 'file-manager' "定制的nerdtree目录树
 endfunction
 
 function! UserInit()
+    Plug 'huos3203/plantuml-syntax'
 endfunction
 
 function! UserConfig()
