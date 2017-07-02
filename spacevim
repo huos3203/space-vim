@@ -25,6 +25,13 @@ function! UserInit()
     Plug 'mitsuse/autocomplete-swift'
     Plug 'keith/swift.vim'
     Plug 'landaire/deoplete-swift'
+
+    "xcode编译工具
+    Plug 'keith/zsh-xcode-completions'
+    Plug 'keith/xcconfig.vim'
+    Plug 'keith/sourcekittendaemon.vim'
+    Plug 'keith/cocoapods.vim'
+
 endfunction
 
 function! UserConfig()
