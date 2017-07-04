@@ -10,7 +10,19 @@ function! Layers()
     Layer 'file-manager' "定制的nerdtree目录树
 endfunction
 
+" Put your private plugins here.
 function! UserInit()
+
+
+    " Space has been set as the default leader key,
+    " if you want to change it, uncomment and set it here.
+    "let g:spacevim_leader = "\<Space>"
+    "let g:spacevim_localleader = "'"
+    "禁止vim-better-default 的键位映射部分，可以将其设置为0.
+    let g:vim_better_default_key_mapping = 0
+
+
+" ---------安装私有插件------
     "模型UML plantuml
     Plug 'huos3203/plantuml-syntax'
     "语法结构
@@ -20,7 +32,8 @@ function! UserInit()
     Plug 'honza/vim-snippets'
     "模板
     Plug 'huos3203/vim-template'
-
+    "markdown预览功能依赖库
+    Plug 'junegunn/vim-xmark', { 'do': 'make' }
     "swift
     Plug 'mitsuse/autocomplete-swift'
     Plug 'keith/swift.vim'
@@ -35,4 +48,23 @@ function! UserInit()
 endfunction
 
 function! UserConfig()
+    " If you enable airline layer and have installed the powerline fonts, set it here.
+    " let g:airline_powerline_fonts=1
+    " color desert
+
+    " When on, lines longer than the width of the window will wrap and
+    " displaying continues on the next line.
+    "set wrap
+
+    "添加映射
+    map jj <Esc>
+
+    " 取消映射键cancel map : jj/jk to Esc
+    "iunmap jj
+    "iunmap jk
+    "cunmap jj
+    "cunmap jk
+
+
+
 endfunction
