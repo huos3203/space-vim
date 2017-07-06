@@ -19,7 +19,7 @@ function! UserInit()
     "let g:spacevim_leader = "\<Space>"
     "let g:spacevim_localleader = "'"
     "禁止vim-better-default 的键位映射部分，可以将其设置为0.
-    let g:vim_better_default_key_mapping = 0
+    "let g:vim_better_default_key_mapping = 0
 
 
 " ---------安装私有插件------
@@ -32,7 +32,7 @@ function! UserInit()
     Plug 'honza/vim-snippets'
     "模板
     Plug 'huos3203/vim-template'
-    "markdown预览功能依赖库
+    "markdown预览功能依赖
     Plug 'junegunn/vim-xmark', { 'do': 'make' }
     "swift
     Plug 'mitsuse/autocomplete-swift'
@@ -57,7 +57,7 @@ function! UserConfig()
     "set wrap
 
     "添加映射
-    map jj <Esc>
+    "map jj <Esc>
 
     " 取消映射键cancel map : jj/jk to Esc
     "iunmap jj
