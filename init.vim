@@ -41,6 +41,4 @@ call spacevim#begin()
 Layer 'spacevim'
 
 call spacevim#end()
-syntax enable
-set background=dark
-colorscheme solarized
+

@@ -20,8 +20,15 @@ function! UserInit()
     "let g:spacevim_localleader = "'"
     "禁止vim-better-default 的键位映射部分，可以将其设置为0.
     "let g:vim_better_default_key_mapping = 0
+    let g:syntastic_swift_checkers = ['swiftpm','swiftlint']
 
+    "安装pathogen
+    execute pathogen#infect()
 
+    MP 'kballard/vim-swift',{
+        \'filetypes': 'swift',
+        \'unite_sources': ['swift/device','swift/developer_dir']
+        \}
 " ---------安装私有插件------
     "模型UML plantuml
     Plug 'huos3203/plantuml-syntax'
@@ -38,7 +45,9 @@ function! UserInit()
     Plug 'mitsuse/autocomplete-swift'
     Plug 'keith/swift.vim'
     Plug 'landaire/deoplete-swift'
-
+    Plug 'kballard/vim-swift'
+    "Plug 'toyamarinyon/vim-swift'
+    
     "xcode编译工具
     Plug 'keith/zsh-xcode-completions'
     Plug 'keith/xcconfig.vim'
@@ -64,7 +73,6 @@ function! UserConfig()
     "iunmap jk
     "cunmap jj
     "cunmap jk
-
 
 
 endfunction
