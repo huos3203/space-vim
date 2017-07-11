@@ -8,6 +8,7 @@ function! Layers()
     Layer 'markdown'     "markdown语法高亮和编辑立即预览功能
     Layer 'ycmd'         "语法自动补齐
     Layer 'file-manager' "定制的nerdtree目录树
+    Layer 'syntax-checking'
 endfunction
 
 " Put your private plugins here.
@@ -31,7 +32,7 @@ function! UserInit()
     Plug 'honza/vim-snippets'
 
     "swift
-    Plug 'vim-syntastic/syntastic'
+    "Plug 'vim-syntastic/syntastic'
     Plug 'keith/swift.vim'      "swiftpm + swiftlint + syntactic集成
     Plug 'keith/sourcekittendaemon.vim' "swift自动补齐提示插件,omnifunc万能不全
     "Plug 'kballard/vim-swift', {'for': 'swift'} ""语法高亮/swift命令/LLVM/在iOS模拟器上编译/运行/支持Xcode多种安装,错误Swift string interpolations do not work well with 'showmatch' 
