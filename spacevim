@@ -31,14 +31,16 @@ function! UserInit()
     "代码块
     Plug 'honza/vim-snippets'
 
+    "shell command
+    Plug 'skywind3000/asyncrun.vim'
     "swift
     "Plug 'vim-syntastic/syntastic'
     Plug 'keith/swift.vim'      "swiftpm + swiftlint + syntactic集成
     Plug 'keith/sourcekittendaemon.vim' "swift自动补齐提示插件,omnifunc万能不全
     "Plug 'kballard/vim-swift', {'for': 'swift'} ""语法高亮/swift命令/LLVM/在iOS模拟器上编译/运行/支持Xcode多种安装,错误Swift string interpolations do not work well with 'showmatch' 
     "Plug 'toyamarinyon/vim-swift'
-    Plug 'landaire/deoplete-swift'
-    Plug 'mitsuse/autocomplete-swift'
+    "Plug 'landaire/deoplete-swift'
+    "Plug 'mitsuse/autocomplete-swift'
 
     "xcode编译工具
     Plug 'keith/zsh-xcode-completions'
