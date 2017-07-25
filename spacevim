@@ -8,7 +8,7 @@ function! Layers()
     Layer 'markdown'     "markdown语法高亮和编辑立即预览功能
     Layer 'ycmd'         "语法自动补齐
     Layer 'file-manager' "定制的nerdtree目录树
-    Layer 'syntax-checking'
+    Layer 'syntax-checking' "支持swifelint，实现语法检测纠正机制"
 endfunction
 
 " Put your private plugins here.
