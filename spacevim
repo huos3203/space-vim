@@ -21,9 +21,7 @@ function! UserInit()
     "let g:spacevim_localleader = "'"
     "禁止vim-better-default 的键位映射部分，可以将其设置为0.
     "let g:vim_better_default_key_mapping = 0
-    let g:syntastic_swift_checkers = ['swiftpm','swiftlint']
-
-" ---------安装私有插件------
+    " ---------安装私有插件------
     Plug 'huos3203/plantuml-syntax'  "plantuml语法高亮
     Plug 'huos3203/vim-template'  ".swift/.h/m/.md/.uml 文件模版
     Plug 'shougo/unite-outline' "源码方法结构
@@ -53,6 +51,14 @@ function! UserConfig()
     " If you enable airline layer and have installed the powerline fonts, set it here.
     " let g:airline_powerline_fonts=1
     " color desert
+
+    "let g:syntastic_swift_checkers = ['swiftpm','swiftlint']
+    "let g:ale_linters = { 'swift': ['swiftlint'], }
+    let g:ale_sign_column_always = 1
+    let g:ale_sign_error = '>>'
+    let g:ale_sign_warning = '--'
+    " Set this. Airline will handle the rest.
+    let g:airline#extensions#ale#enabled = 1
 
     " When on, lines longer than the width of the window will wrap and
     " displaying continues on the next line.
