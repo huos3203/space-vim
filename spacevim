@@ -6,7 +6,7 @@ function! Layers()
     Layer 'github'
     Layer 'git'
     Layer 'markdown'     "markdown语法高亮和编辑立即预览功能
-    Layer 'ycmd'         "语法自动补齐
+    "Layer 'ycmd'         \"语法自动补齐
     Layer 'file-manager' "定制的nerdtree目录树
     Layer 'syntax-checking' "支持swifelint，实现语法检测纠正机制"
 endfunction
@@ -32,6 +32,8 @@ function! UserInit()
     "shell command
     Plug 'skywind3000/asyncrun.vim'
     "swift
+    Plug 'jerrymarino/SwiftPlayground.vim'
+    Plug 'jerrymarino/iCompleteMe'
     "Plug 'vim-syntastic/syntastic'
     Plug 'keith/swift.vim'      "swiftpm + swiftlint + syntactic集成
     Plug 'keith/sourcekittendaemon.vim' "swift自动补齐提示插件,omnifunc万能不全
