@@ -46,6 +46,7 @@ function! UserInit()
     Plug 'keith/zsh-xcode-completions'
     Plug 'keith/xcconfig.vim'
     Plug 'keith/cocoapods.vim'
+    Plug 'gfontenot/vim-xcode' 
 
 endfunction
 
