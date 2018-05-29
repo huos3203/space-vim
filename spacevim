@@ -22,7 +22,9 @@ function! UserInit()
     "禁止vim-better-default 的键位映射部分，可以将其设置为0.
     "let g:vim_better_default_key_mapping = 0
     " ---------安装私有插件------
-    Plug 'huos3203/plantuml-syntax'  "plantuml语法高亮
+    Plug 'huos3203/plantuml-syntax'  "plantuml语法高亮 Plug 'aklt/plantuml-syntax'
+    Plug 'tyru/open-browser.vim'
+    Plug 'weirongxu/plantuml-previewer.vim' "在线工具：http://sujoyu.github.io/plantuml-previewer/
     Plug 'huos3203/vim-template'  ".swift/.h/m/.md/.uml 文件模版
     Plug 'shougo/unite-outline' "源码方法结构
     Plug 'ryotakato/unite-outline-objc'
@@ -46,7 +48,7 @@ function! UserInit()
     Plug 'keith/zsh-xcode-completions'
     Plug 'keith/xcconfig.vim'
     Plug 'keith/cocoapods.vim'
-    Plug 'gfontenot/vim-xcode' 
+    Plug 'gfontenot/vim-xcode'
 
 endfunction
 
