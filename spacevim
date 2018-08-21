@@ -43,12 +43,30 @@ function! UserInit()
     "Plug 'toyamarinyon/vim-swift'
     "Plug 'landaire/deoplete-swift'
     "Plug 'mitsuse/autocomplete-swift'
+endfunction
+
+function! UserInit()
+    "模型UML plantuml
+    Plug 'huos3203/plantuml-syntax'
+    "语法结构
+    Plug 'shougo/unite-outline'
+    Plug 'ryotakato/unite-outline-objc'
+    "代码块
+    Plug 'honza/vim-snippets'
+    "模板
+    Plug 'huos3203/vim-template'
+
+    "swift
+    Plug 'mitsuse/autocomplete-swift'
+    Plug 'keith/swift.vim'
+    Plug 'landaire/deoplete-swift'
 
     "xcode编译工具
     Plug 'keith/zsh-xcode-completions'
     Plug 'keith/xcconfig.vim'
     Plug 'keith/cocoapods.vim'
     Plug 'gfontenot/vim-xcode'
+    Plug 'keith/sourcekittendaemon.vim'
 
 endfunction
 
@@ -77,6 +95,4 @@ function! UserConfig()
     "iunmap jk
     "cunmap jj
     "cunmap jk
-
-
 endfunction
