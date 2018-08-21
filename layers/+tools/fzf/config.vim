@@ -1,4 +1,4 @@
-if g:spacevim_gui_running
+if g:spacevim.gui && !has('terminal')
   " LeaderF {
   nnoremap <Leader>ff :LeaderfFile ~<CR>
   nnoremap <Leader>f? :LeaderfFile<CR>
@@ -10,25 +10,29 @@ else
   " fzf.vim {
   let $LANG = 'en_US'
   " Customize fzf colors to match your color scheme
+  " Only suitable for space-vim-dark theme, other themes are not guaranteed.
   let g:fzf_colors = {
-              \ 'fg':      ['fg', 'Normal'],
+              \ 'fg':      ['fg', 'StatusLineNC'],
               \ 'bg':      ['bg', 'Normal'],
-              \ 'hl':      ['fg', 'Function'],
-              \ 'fg+':     ['fg', 'String', 'CursorColumn', 'Normal'],
-              \ 'bg+':     ['bg', 'Statusline', 'CursorColumn'],
-              \ 'hl+':     ['fg', 'Type'],
-              \ 'info':    ['fg', 'PreProc'],
-              \ 'prompt':  ['fg', 'Conditional'],
+              \ 'hl':      ['fg', 'String'],
+              \ 'fg+':     ['fg', 'Number', 'Normal'],
+              \ 'bg+':     ['bg', 'StatusLine', 'Normal'],
+              \ 'hl+':     ['fg', 'Exception'],
+              \ 'info':    ['fg', 'Special'],
+              \ 'prompt':  ['fg', 'Function'],
               \ 'pointer': ['fg', 'Error'],
-              \ 'marker':  ['fg', 'String'],
-              \ 'spinner': ['fg', 'Label'],
-              \ 'header':  ['fg', 'Comment'],
+              \ 'marker':  ['fg', 'Error'],
+              \ 'spinner': ['fg', 'Statement'],
+              \ 'header':  ['fg', 'Number'],
               \   }
+
   nmap <Leader>? <plug>(fzf-maps-n)
   xmap <Leader>? <plug>(fzf-maps-x)
   omap <Leader>? <plug>(fzf-maps-o)
 
-  nnoremap <Leader>ag :Ag<CR>
+  command! -nargs=* Rag call spacevim#plug#fzf#AgInProject(<q-args>)
+  nnoremap <Leader>ag :Ag!<CR>
+  vnoremap <Leader>ag :<c-u>call spacevim#plug#fzf#Vsearch()<CR>
   nnoremap <Leader>bb :Buffers<CR>
 
   nnoremap <Leader>b? :Buffers<CR>
@@ -36,9 +40,10 @@ else
   nnoremap <Leader>f? :Files<CR>
 
   nnoremap <Leader>ff :Files ~<CR>
-  " }
+  nnoremap <silent> <Leader>sf :call spacevim#plug#fzf#Session()<CR>
 
-  " fzf-filemru {
-  nnoremap <Leader>pr :ProjectMru --tiebreak=end<cr>
+  command! -bang -nargs=* Rg call spacevim#plug#fzf#Rg(<q-args>, <bang>0)
+  nnoremap <leader>rg :Rg!<cr>
+  vnoremap <leader>rg :call spacevim#plug#fzf#RgVisual()<CR>
   " }
 endif

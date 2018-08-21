@@ -3,23 +3,21 @@ scriptencoding utf-8
 " ultisnips {
   " Set ultisnips triggers
   let g:UltiSnipsSnippetDirectories=['UltiSnips']
-  exe 'set rtp+=' . expand(g:spacevim_dir . '/private/UltiSnips')
-  let g:UltiSnipsSnippetsDir = [g:spacevim_dir.'/private/UltiSnips', g:spacevim_plug_home.'vim-snippets/UltiSnips/']
+  exe 'set rtp+=' . expand(g:spacevim.base . '/private/UltiSnips')
+  let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 
-  let g:UltiSnipsListSnippets = '<C-l>'
-  let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-  let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+  " c-j c-k for moving in snippet
+  let g:UltiSnipsJumpForwardTrigger = "<c-j>"
+  let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
 
-  " Fix tab conflict with YCM
-  let g:UltiSnipsExpandTrigger = '<C-e>'
-  let g:ulti_expand_or_jump_res = 0
-  function! ExpandSnippetOrCarriageReturn()
-    let l:snippet = UltiSnips#ExpandSnippetOrJump()
-    if g:ulti_expand_or_jump_res > 0
-      return l:snippet
-    else
-      return "\<CR>"
-    endif
-  endfunction
-  inoremap <expr> <CR> pumvisible() ? "\<C-R>=ExpandSnippetOrCarriageReturn()\<CR>" : "\<CR>"
+  if has_key(g:plugs, 'ncm2-ultisnips')
+    " <CR> is used to expand snippets
+    inoremap <silent> <expr> <CR> ((pumvisible() && empty(v:completed_item)) ?  "\<c-y>\<cr>" : (!empty(v:completed_item) ? ncm2_ultisnips#expand_or("", 'n') : "\<CR>" ))
+    imap <expr> <c-u> ncm2_ultisnips#expand_or("\<Plug>(ultisnips_expand)", 'm')
+    smap <c-u> <Plug>(ultisnips_expand)
+    let g:UltiSnipsExpandTrigger = "<Plug>(ultisnips_expand)"
+    let g:UltiSnipsRemoveSelectModeMappings = 0
+  else
+    let g:UltiSnipsExpandTrigger = '<C-e>'
+  endif
 " }

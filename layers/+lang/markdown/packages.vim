@@ -1,3 +1,9 @@
-MP 'plasticboy/vim-markdown',      { 'for': 'markdown' }
-MP 'mzlogin/vim-markdown-toc',     { 'for': 'markdown' }
-MP 'iamcco/markdown-preview.vim',  { 'on': 'MarkdownPreview' }
+if g:spacevim.timer
+  MP 'plasticboy/vim-markdown',      { 'on': [] }
+else
+  MP 'plasticboy/vim-markdown',      { 'for': 'markdown' }
+endif
+
+MP 'mzlogin/vim-markdown-toc',     { 'on': ['GenTocGFM', 'GenTocRedcarpet', 'GenTocGitLab', 'UpdateToc', 'RemoveToc'] }
+MP 'previm/previm', { 'for': 'markdown', 'on': 'PrevimOpen' }
+autocmd! User vim-markdown,vim-markdown-toc,previm call spacevim#autocmd#markdown#Init()

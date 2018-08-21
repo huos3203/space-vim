@@ -1,0 +1,109 @@
+" Let Vim and NeoVim shares the same plugin directory.
+" Comment it out if you don't like
+let g:spacevim_plug_home = '~/.vim/plugged'
+
+" The default leader key is space key.
+" Uncomment the line below and modify "<\Space>" if you prefer another
+" let g:spacevim_leader = "<\Space>"
+
+" The default local leader key is comma.
+" Uncomment the line below and modify ',' if you prefer another
+" let g:spacevim_localleader = ','
+
+" Enable the existing layers in space-vim
+let g:spacevim_layers = [
+      \ 'fzf', 'unite', 'better-defaults',
+      \ 'which-key','chinese',
+      \ 'github','git',
+      \ 'markdown',     "markdown语法高亮和编辑立即预览功能
+      \ 'file-manager', "定制的nerdtree目录树
+      \ 'syntax-checking',  "支持swifelint，实现语法检测纠正机制"
+      \ ]
+"Layer 'ycmd'         \"语法自动补齐
+" If you want to have more control over the layer, try using Layer command.
+" if g:spacevim.gui
+"   Layer 'airline'
+" endif
+
+" Manage your own plugins, refer to vim-plug's instruction for more detials.
+function! UserInit()
+
+    " Add plugin via Plug command.
+    Plug 'junegunn/seoul256.vim'
+    "禁止vim-better-default 的键位映射部分，可以将其设置为0.
+    "let g:vim_better_default_key_mapping = 0
+    " ---------安装私有插件------
+    Plug 'huos3203/plantuml-syntax'  "plantuml语法高亮 Plug 'aklt/plantuml-syntax'
+    Plug 'tyru/open-browser.vim'
+    Plug 'weirongxu/plantuml-previewer.vim' "在线工具：http://sujoyu.github.io/plantuml-previewer/
+    Plug 'huos3203/vim-template'  ".swift/.h/m/.md/.uml 文件模版
+    Plug 'shougo/unite-outline' "源码方法结构
+    Plug 'ryotakato/unite-outline-objc'
+    "代码块
+    Plug 'honza/vim-snippets'
+
+    "shell command
+    Plug 'skywind3000/asyncrun.vim'
+    "swift
+    Plug 'jerrymarino/SwiftPlayground.vim'
+    Plug 'jerrymarino/iCompleteMe'
+    "Plug 'vim-syntastic/syntastic'
+    Plug 'keith/swift.vim'      "swiftpm + swiftlint + syntactic集成
+    Plug 'keith/sourcekittendaemon.vim' "swift自动补齐提示插件,omnifunc万能不全
+    "Plug 'kballard/vim-swift', {'for': 'swift'} ""语法高亮/swift命令/LLVM/在iOS模拟器上编译/运行/支持Xcode多种安装,错误Swift string interpolations do not work well with 'showmatch'
+    "Plug 'toyamarinyon/vim-swift'
+    "Plug 'landaire/deoplete-swift'
+    "Plug 'mitsuse/autocomplete-swift'
+
+    "模型UML plantuml
+    Plug 'huos3203/plantuml-syntax'
+    "语法结构
+    Plug 'shougo/unite-outline'
+    Plug 'ryotakato/unite-outline-objc'
+    "代码块
+    Plug 'honza/vim-snippets'
+    "模板
+    Plug 'huos3203/vim-template'
+
+    "swift
+    Plug 'mitsuse/autocomplete-swift'
+    Plug 'keith/swift.vim'
+    Plug 'landaire/deoplete-swift'
+
+    "xcode编译工具
+    Plug 'keith/zsh-xcode-completions'
+    Plug 'keith/xcconfig.vim'
+    Plug 'keith/cocoapods.vim'
+    Plug 'gfontenot/vim-xcode'
+    Plug 'keith/sourcekittendaemon.vim'
+
+endfunction
+
+" Override the default settings as well as adding extras
+function! UserConfig()
+  " If you have installed the powerline fonts and want to enable airline layer
+  " let g:airline_powerline_fonts=1
+  "let g:syntastic_swift_checkers = ['swiftpm','swiftlint']
+  "let g:ale_linters = { 'swift': ['swiftlint'], }
+  let g:ale_sign_column_always = 1
+  let g:ale_sign_error = '>>'
+  let g:ale_sign_warning = '--'
+  " Set this. Airline will handle the rest.
+  let g:airline#extensions#ale#enabled = 1
+
+  " Use gui colors in terminal if available
+  function! s:enable_termgui()
+    if has('termguicolors')
+      set termguicolors
+      if g:spacevim.tmux
+        " If use vim inside tmux, see https://github.com/vim/vim/issues/993
+        " set Vim-specific sequences for RGB colors
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+      endif
+    endif
+  endfunction
+
+  " If your terminal(-emulator) supports true colors, uncomment the line below
+  " call s:enable_termgui()
+endfunction

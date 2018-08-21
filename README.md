@@ -1,46 +1,37 @@
 <p align="left">
-<a href="https://github.com/liuchengxu/space-vim"><img src="https://rawgit.com/liuchengxu/space-vim/master/assets/space-vim-badge.svg" alt="badge"></a>
+<a href="https://github.com/liuchengxu/space-vim"> <img src="https://rawgit.com/liuchengxu/space-vim/master/assets/space-vim-badge.svg" alt="badge"></a>
 <a href="https://github.com/liuchengxu/space-vim/blob/master/LICENSE"><img src="https://rawgit.com/liuchengxu/space-vim/master/assets/license.svg" alt="license"></a>
 <a href="https://travis-ci.org/liuchengxu/space-vim"><img src="https://travis-ci.org/liuchengxu/space-vim.svg" alt="Build Status"></a>
 </p>
 
 --------------------
 
-<p align="center"><img src="https://github.com/liuchengxu/space-vim/blob/gh-pages/docs/img/space-vim.png?raw=true" alt="space-vim"/></p>
-
-<p align="center">
-<b><a href="https://liuchengxu.github.io/space-vim/docs/org/tutorial_cn.html#orgheadline4">前言</a></b> |
-<b><a href="https://liuchengxu.github.io/space-vim/docs/org/tutorial_cn.html#orgheadline5">运行截图</a></b> |
-<b><a href="https://liuchengxu.github.io/space-vim/docs/org/tutorial_cn.html#orgheadline6">适用人群</a></b> |
-<b><a href="https://liuchengxu.github.io/space-vim/docs/org/tutorial_cn.html#orgheadline14">开始使用</a></b> |
-<b><a href="https://liuchengxu.github.io/space-vim/docs/org/tutorial_cn.html#orgheadline15">个性化</a></b> |
-<b><a href="https://liuchengxu.github.io/space-vim/docs/org/tutorial_cn.html#orgheadline16">更新</a></b> |
-<b><a href="https://liuchengxu.github.io/space-vim/docs/org/tutorial_cn.html#orgheadline19">默认安装</a></b> |
-<b><a href="https://liuchengxu.github.io/space-vim/docs/org/tutorial_cn.html#orgheadline25">基础键位</a></b> |
-<b><a href="https://liuchengxu.github.io/space-vim/docs/org/tutorial_cn.html#orgheadline28">使用建议</a></b>
-</p>
+<p align="center"><img src="https://raw.githubusercontent.com/liuchengxu/space-vim/gh-pages/docs/img/space-vim.png" alt="space-vim"/></p>
 
 ### Table of Contents
 
 <!-- vim-markdown-toc GFM -->
+
 * [Introduction](#introduction)
 * [Features](#features)
 * [For whom?](#for-whom)
 * [Install](#install)
-    * [Linux and macOS](#linux-and-macos)
-    * [Windows](#windows)
-    * [Manual (Linux and macOS)](#manual-linux-and-macos)
+  * [Prerequisites](#prerequisites)
+  * [Linux and macOS](#linux-and-macos)
+    * [one-line installer](#one-line-installer)
+    * [Makefile](#makefile)
+  * [Windows](#windows)
+  * [Manual](#manual)
 * [Customize](#customize)
-    * [Presetting](#presetting)
-    * [`Layers()`](#layers)
-    * [`UserInit()`](#userinit)
-    * [`UserConfig()`](#userconfig)
+  * [Presetting](#presetting)
+  * [`UserInit()`](#userinit)
+  * [`UserConfig()`](#userconfig)
 * [How to use](#how-to-use)
-    * [Bootstrap](#bootstrap)
-    * [Commands](#commands)
-    * [Tips](#tips)
-        * [Enable GUI color in terminal vim](#enable-gui-color-in-terminal-vim)
-        * [Font](#font)
+  * [Bootstrap](#bootstrap)
+  * [Commands](#commands)
+  * [Tips](#tips)
+    * [Enable GUI color in terminal vim](#enable-gui-color-in-terminal-vim)
+    * [Terminal Font](#terminal-font)
 * [Update](#update)
 * [Contributions](#contributions)
 * [Acknowledgements](#acknowledgements)
@@ -58,17 +49,16 @@ Elegance here means pleasing, graceful as well as simple. If you are unfamiliar 
 
 The distribution is completely customizable using `.spacevim`, which is equivalent to `.spacemacs` in spacemacs.
 
-![screenshot](https://raw.githubusercontent.com/liuchengxu/img/master/space-vim/space-vim-cterm.png)
-(Terminal vim with [space-vim-dark](https://github.com/liuchengxu/space-vim-dark) theme)
+![screenshot](https://raw.githubusercontent.com/liuchengxu/img/master/space-vim/space-vim-gui.png)
+(Terminal vim with [space-vim-dark](https://github.com/liuchengxu/space-vim-dark))
+
+[More screenshots](https://github.com/liuchengxu/space-vim/wiki/screenshots)
 
 ## Features
 
 - **Beautiful interface:** I have written a vim colorscheme [space-vim-dark](https://github.com/liuchengxu/space-vim-dark) based on spacemacs-dark theme. You could also try [spacemacs-theme.vim](https://github.com/colepeters/spacemacs-theme.vim).
 
-    ![screenshot](https://raw.githubusercontent.com/liuchengxu/img/master/space-vim/space-vim-gui.png)
-    (Terminal vim with `set termguicolors`)
-
-- **Mnemonic key bindings:** commands have mnemonic prefixes like <kbd>SPC b</kbd> for all the buffer commands.
+- **Mnemonic key bindings:** commands have mnemonic prefixes like <kbd>SPC b</kbd> for all the buffer commands. Lots of basic key bindings are provided by [vim-better-default](https://github.com/liuchengxu/vim-better-default).
 
     Meanwhile, the whole key bindings have been well adapted for vim for the lack of great plugins similar to which-key in emacs. Most key bindings are limited to no more than two keystrokes without counting `<Leader>` or `<LocalLeader>` in, e.g. <kbd>SPC x d</kbd> to delete trailing whitespaces.
 
@@ -82,154 +72,118 @@ The distribution is completely customizable using `.spacevim`, which is equivale
 - the vimmers who pursuit a beautiful appearance
 - the users **using both vim and spacemacs**
 
+Have a look at the [Introduction](https://github.com/liuchengxu/space-vim/wiki/Introduction) in wiki as well.
+
 If you have been a vimmer for quite a while, just pick out the part you are interested in. space-vim is well-organized due to the layers concept, you can easily find what you want. Since some guys are interested in the statusline part of space-vim, this section has been extracted as [eleline.vim](https://github.com/liuchengxu/eleline.vim).
 
 ## Install
 
-You have to satisfy some prerequisites at first:
+### Prerequisites
 
-- vim with `+python` or `+python3` feature.
+Make sure you have installed:
 
-    If `:echo has('python')` or `:echo has('python3')` returns `1`, then you are done. What's more, the most recent vim version is recommended.
+- **git**
+- **Vim** or **NeoVim**
 
-- git.
+The most recent Vim(NeoVim) version is recommended, for space-vim has been specifically optimized for Vim8 and NeoVim with respect to the startup time.
 
 :exclamation: ~~When layers enabled at the first time, you need to run `:PlugInstall` to install relevant plugins~~.
 
 ### Linux and macOS
 
-- curl
+#### one-line installer
 
-    ```sh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/liuchengxu/space-vim/master/install.sh)"
-    ```
+```bash
+$ bash <(curl -fsSL https://raw.githubusercontent.com/liuchengxu/space-vim/master/install.sh)
+```
+#### Makefile
 
-- wget
-
-    ```sh
-    sh -c "$(wget -qO- https://raw.githubusercontent.com/liuchengxu/space-vim/master/install.sh)"
-    ```
-
-    :warning: For neovim, after the quick installer is done, you still need to create a symlink:
-
-    ```sh
-    ln -s ~/.space-vim/init.vim ~/.config/nvim/init.vim
-    ```
+```bash
+$ git clone https://github.com/liuchengxu/space-vim.git ~/.space-vim
+$ cd ~/.space-vim
+$ make vim     # install space-vim for Vim
+$ make neovim  # install space-vim for NeoVim
+```
 
 ### Windows
 
-1. [Download git](https://git-scm.com/download/win)
+The easist way is to download [`install.cmd`](https://raw.githubusercontent.com/liuchengxu/space-vim/master/install.cmd) and **run it as administrator**, or [install space-vim manually](https://github.com/liuchengxu/space-vim/wiki/install#windows).
 
-2. [Download Vim and Python](https://github.com/vim/vim-win32-installer/releases)
+![windows](https://raw.githubusercontent.com/liuchengxu/img/master/space-vim/win-gvim.png)
 
-3. Download [vim-plug](https://github.com/junegunn/vim-plug#installation):
+### Manual
 
-    **windows (PowerShell)**
-
-    ```sh
-    md ~\.vim\autoload
-    $uri = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    (New-Object Net.WebClient).DownloadFile($uri, $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath("~\.vim\autoload\plug.vim"))
-    ```
-
-4. Enter your home directory, Open *Git Bash* by right-clicking and choosing the option `Git Bash Here`. Run the following commands to download space-vim and make a symlink.
-
-    ```sh
-    git clone https://github.com/liuchengxu/space-vim.git ~/.space-vim
-    ln -s ~/.space-vim/init.vim ~/.vimrc
-    ```
-
-5. Create `.spacevim` in home directory.
-
-    ```vim
-    function! Layers()
-        Layer 'fzf'
-        Layer 'unite'
-        Layer 'better-defaults'
-        " For chinese users
-        Layer 'chinese'
-    endfunction
-
-    function! UserInit()
-    endfunction
-
-    function! UserConfig()
-    endfunction
-    ```
-
-6. Open vim, run `:PlugInstall`.
-
-### Manual (Linux and macOS)
+Given git and Vim/NeoVim have been installed already:
 
 1. Clone [space-vim](https://github.com/liuchengxu/space-vim)
 
-    ```sh
-    git clone https://github.com/liuchengxu/space-vim.git ~/.space-vim
+    ```bash
+    $ git clone https://github.com/liuchengxu/space-vim.git ~/.space-vim
     ```
 
 2. Install [vim-plug](https://github.com/junegunn/vim-plug#installation), refer to vim-plug installation section for more information.
 
-3. Create a symlink.
+3. Create the symlinks.
 
-    ```sh
-    # for vim
-    ln -s ~/.space-vim/init.vim ~/.vimrc
+    **Linux and macOS**
 
-    # for neovim
-    ln -s ~/.space-vim/init.vim ~/.config/nvim/init.vim
+    ```bash
+    # For Vim
+    $ ln -s ~/.space-vim/init.vim ~/.vimrc
+
+    # For NeoVim
+    $ ln -s ~/.space-vim/init.vim ~/.config/nvim/init.vim
+
+    # Both for Vim and NeoVim
+    $ cp ~/.space-vim/init.spacevim ~/.spacevim
     ```
-5. Open vim, then space-vim will automatically install the missing plugins in enabled layers. If auto-installation fails unexpectly, please try running `:PlugInstall` manually.
+
+5. Open vim, then space-vim will automatically install the missing plugins. If auto-installation fails unexpectly, please try running `:PlugInstall` manually.
 
 ## Customize
 
 You can use `.spacevim` in your home directory to customize space-vim, where you can enable the existing layers, add your extra plugins and private configurations.
 
-If `.spacevim` does not exist, vanilla vim will be loaded! Refer to [.spacevim.template](https://github.com/liuchengxu/space-vim/wiki/.spacevim.template) as an example.
+If `.spacevim` does not exist, vanilla vim will be loaded! Refer to [init.spacevim](init.spacevim) as an example.
 
 ### Presetting
 
 ```vim
-" Let vim and neovim share the same plugin directory
+" Let Vim and NeoVim shares the same plugin directory
 let g:spacevim_plug_home = '~/.vim/plugged'
 
-" Change the background color of theme space-vim-dark (default 235)
-let g:space_vim_dark_background = 234
+" The default leader key is space key.
+" Uncomment the line below and modify "<\Space>" if you prefer another
+" let g:spacevim_leader = "<\Space>"
+
+" The default local leader key is comma.
+" Uncomment the line below and modify ',' if you prefer another
+" let g:spacevim_localleader = ','
+
+" Enable the existing layers in space-vim
+let g:spacevim_layers = [
+      \ 'fzf', 'unite', 'better-defaults',
+      \ 'which-key',
+      \ ]
+
+" If you want to have more control over the layer, try using Layer command.
+" if g:spacevim.gui
+"   Layer 'airline'
+" endif
 ```
 
-### `Layers()`
+Please refer to [LAYERS.md](layers/LAYERS.md) to take a look at the whole shipped layers.
 
-Please refer to [LAYERS](https://github.com/liuchengxu/space-vim/blob/master/layers/LAYERS.md) to take a look at the whole shipped layers.
-
-```vim
-" You can enable the existing layers in space-vim and
-" exclude the partial plugins in a certain layer.
-" The command Layer is vaild in the function Layers().
-" Use exclude option if you don't want the full Layer,
-" e.g., Layer 'better-defaults', { 'exclude': 'itchyny/vim-cursorword' }
-function! Layers()
-
-    " Default layers, recommended!
-    Layer 'fzf'
-    Layer 'unite'
-    Layer 'better-defaults'
-
-endfunction
-```
+Basically, `g:spacevim_layers` almost takes the place of `Layer` command. As far as I known, most people never use the option of `Layer` command, e.g., `exclude`, so `g:spacevim_layers` could save a lengthy `Layer` list, requiring less ceremony. Nevertheless, `Layer` command is still avaiable for some advanced uses.
 
 ### `UserInit()`
 
 ```vim
-" Put your private plugins here, e.g., change the colorscheme.
+" Manage your own plugins, refer to vim-plug's instruction for more detials.
 function! UserInit()
 
-    " Space has been set as the default leader key,
-    " Comma has been set at the default localleader key.
-    " If you want to change it, uncomment and set it here.
-    " let g:spacevim_leader = "your leader key"
-    " let g:spacevim_localleader = 'your localleader key'
-
-    " Install private plugins
-    Plug 'morhetz/gruvbox'
+  " Add plugin via Plug command.
+  Plug 'junegunn/seoul256.vim'
 
 endfunction
 ```
@@ -237,10 +191,27 @@ endfunction
 ### `UserConfig()`
 
 ```vim
-" Override the existing configurations and add extras here.
+" Override the default settings as well as adding extras
 function! UserConfig()
 
-    " color gruvbox
+  " If you have installed the powerline fonts and want to enable airline layer
+  " let g:airline_powerline_fonts=1
+
+  " Use gui colors in terminal if available
+  function! s:enable_termgui()
+    if has('termguicolors')
+      set termguicolors
+      if g:spacevim.tmux
+        " If use vim inside tmux, see https://github.com/vim/vim/issues/993
+        " set Vim-specific sequences for RGB colors
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+      endif
+    endif
+  endfunction
+
+  " If your terminal(-emulator) supports true colors, uncomment the line below
+  " call s:enable_termgui()
 
 endfunction
 ```
@@ -266,7 +237,7 @@ If you want to know more about the bootstrap of space-vim, please see [bootstrap
  Command      | Description
  :---         | :---
 `LayerStatus` | Check the status of layers
-`LayerUpdate` | Update the structure of *layers* directory
+`LayerCache`  | Cache the information of *layers* in `info.vim`
 
 ### Tips
 
@@ -287,23 +258,28 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 For more details about true colour, please see the gist [TrueColour.md](https://gist.github.com/XVilka/8346728).
 
-#### Font
+#### Terminal Font
 
-Install the [Source Code Pro](https://github.com/adobe-fonts/source-code-pro) or [Powerline](https://github.com/powerline/fonts) font, especially for [airline](https://github.com/liuchengxu/space-vim/blob/master/layers/%2Bthemes/airline/README.md) Layer.
+<img src="https://github.com/liuchengxu/space-vim/blob/gh-pages/docs/img/iterm2_powerline_setting.png?raw=true" align="right" width="550px" alt="iterm2-font-setting" />
 
-If you are running in terminal you'll need to change font settings of your terminal as well.
+First, install the [Source Code Pro](https://github.com/adobe-fonts/source-code-pro) or [Powerline](https://github.com/powerline/fonts) font, which is important for [airline](https://github.com/liuchengxu/space-vim/blob/master/layers/%2Bthemes/airline/README.md) layer.
 
-![iterm2_font_setting](https://github.com/liuchengxu/space-vim/blob/gh-pages/docs/img/iterm2_powerline_setting.png?raw=true)
+Second, since console Vim uses whatever font the console/terminal is using, you'll have to change the font setting of your terminal.
 
 ## Update
 
-The simplest way to update is to reinstall it completely by rerunning the installer above. It will non-destructively upgrade to the latest version.
+Run `make update`:
+
+```bash
+$ cd path/to/space-vim
+$ make update
+```
 
 Alternatively, you can manually perform the following steps. If anything has changed with the structure of the configuration, you will have to create the appropriate symlinks.
 
-```sh
-cd path/to/space-vim/
-git pull origin master
+```bash
+$ cd path/to/space-vim
+$ git pull origin master
 ```
 ## Contributions
 
@@ -313,7 +289,7 @@ Space-vim is still in beta. If you are interested, contributions are highly welc
 
 ## Acknowledgements
 
-I would like to thank the many people who have helped and contributed to this project. Furthermore, space-vim will never born without the following outstanding open source projects.
+I would like to thank the many people who have helped and contributed to this project. What's more, space-vim would never have become what it is now, without the help of these projects!
 
 - [spacemacs](https://github.com/syl20bnr/spacemacs)
 - [vim-plug](https://github.com/junegunn/vim-plug)
@@ -325,3 +301,8 @@ I would like to thank the many people who have helped and contributed to this pr
 - [A Vim Configuration for Spacemacs User](http://www.liuchengxu.org/posts/space-vim/)
 - [用 Vim 写 Python 的最佳实践](https://www.v2ex.com/t/337102#reply61)
 - [手工制作一个漂亮的 vim statusline ](https://segmentfault.com/a/1190000007939244)
+
+## Contributors
+
+This project exists thanks to all the people who contribute.
+<a href="https://github.com/liuchengxu/space-vim/graphs/contributors"><img src="https://opencollective.com/space-vim/contributors.svg?width=890&button=false" /></a>
